@@ -1,0 +1,56 @@
+.equipmentColumn {
+  flex: 1;
+  margin-inline: 1rem;
+}
+
+.titleBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.titleBox p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.icon {
+  background-color: var(--primary);
+  border-radius: 100%;
+  padding: 0.1rem;
+}
+
+
+/* .equipmentCards {
+  max-height: 600px;
+  overflow-y: scroll;
+} */
+
+/* .equipmentCards::-webkit-scrollbar {
+  width: 3px;
+}
+
+.equipmentCards::-webkit-scrollbar-track {
+  background: var(--background-light);
+}
+
+.equipmentCards::-webkit-scrollbar-thumb {
+  background: var(--primary);
+}
+
+.equipmentCards::-webkit-scrollbar-thumb:hover {
+  background: #888;
+} */
+
+@media screen and (max-width: 550px) {
+  .cardIcon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .equipmentColumn {
+    width: 100%;
+  }
+}

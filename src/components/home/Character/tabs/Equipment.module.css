@@ -1,0 +1,50 @@
+.equipment {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.weight {
+  background-color: var(--background);
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+}
+
+.weight strong {
+  font-size: 1.2rem;
+}
+
+.equipmentColumns {
+  display: flex;
+  gap: 1.5rem 0;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.line {
+  width: 1px;
+  height: 100;
+  background-color: var(--primary);
+}
+
+@media screen and (max-width: 1054px) {
+  .line:nth-child(4) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 821px) {
+  .line:nth-child(2) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .cardIcon {
+    width: 24px;
+    height: 24px;
+  }
+}
