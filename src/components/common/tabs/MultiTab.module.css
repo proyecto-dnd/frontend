@@ -37,4 +37,20 @@
   background-color: var(--background-light);
   padding: 1rem;
   border-radius: var(--border-radius);
+  max-width: 100%;
+}
+
+@media screen and (max-width: 670px) {
+  .tabs {
+    gap: 0.25rem;
+    margin-left: 0.5rem;
+  }
+
+  .tabs > button.active span {
+    display: inline;
+  }
+
+  .tabs > button span {
+    display: none;
+  } 
 }
