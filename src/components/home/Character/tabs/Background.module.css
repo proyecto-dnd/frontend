@@ -1,0 +1,38 @@
+.background {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.listContainer {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+}
+
+.storyParagraph {
+  padding: 0.75rem 0;
+}
+
+.line {
+  width: 1px;
+  background-color: var(--primary);
+}
+
+.traitContainer {
+  padding: 0.75rem 0;
+}
+
+.traitContainer h4 {
+  margin-bottom: 0.25rem;
+}
+
+@media screen and (max-width: 950px) {
+  .background {
+    flex-direction: column;
+    gap: 0.25rem;
+    justify-content: center;
+  }
+}

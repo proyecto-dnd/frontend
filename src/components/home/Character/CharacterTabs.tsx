@@ -13,8 +13,8 @@ import Sparkles from '@/components/icons/stats/Sparkles'
 const CharacterTabs = () => {
 
   const tabs: Tab[] = [
-    { name: 'stats', label: 'Estadísticas', icon: <ChartBar />, component: <Stats /> },
     { name: 'background', label: 'Trasfondo', icon: <Book />, component: <Background /> },
+    { name: 'stats', label: 'Estadísticas', icon: <ChartBar />, component: <Stats /> },
     { name: 'equipment', label: 'Equipo', icon: <Sword />, component: <Equipment /> },
     { name: 'spells', label: 'Conjuros', icon: <Wand />, component: <Spells /> },
     { name: 'traits', label: 'Rasgos', icon: <Sparkles />, component: <Traits /> }
