@@ -11,6 +11,7 @@ import SpellBook from "@/components/icons/SpellBook";
 import Cash from "@/components/icons/Cash";
 import DiceEvent from "./DiceEvent";
 import AttackEvent from "./AttackEvent";
+import TradeEvent from "./TradeEvent";
 
 const Chat = () => {
   const [active, setActive] = useState<string | false>("attack");
@@ -44,7 +45,7 @@ const Chat = () => {
       <div className={styles.messagesContainer}>
         <Message />
       </div>
-      <form className={styles.chatBar}>
+      <div className={styles.chatBar}>
         <Input
           type="text"
           placeholder="Describe la acción"
@@ -53,8 +54,8 @@ const Chat = () => {
         <ActionSquare display={<DiceEvent />} icon={<D20 size={28} />} handleActive={() => handleActive("dice")} active={active === "dice"} />
         <ActionSquare display={<AttackEvent />} icon={<Stiletto size={28} />} handleActive={() => handleActive("attack")} active={active === "attack"} />
         <ActionSquare display={<DiceEvent />} icon={<SpellBook size={28} />} handleActive={() => handleActive("spell")} active={active === "spell"} />
-        <ActionSquare display={<DiceEvent />} icon={<Cash size={28} />} handleActive={() => handleActive("trade")} active={active === "trade"} />
-      </form>
+        <ActionSquare display={<TradeEvent />} icon={<Cash size={28} />} handleActive={() => handleActive("trade")} active={active === "trade"} />
+      </div>
     </section>
   );
 };

@@ -16,6 +16,8 @@ export default function useLogin() {
       },
       body: JSON.stringify({ email, password })
     }).then(res => res.json()).then(data => {
+      console.log(data);
+      
       window.localStorage.setItem('user', data.data.username)
       router.push('/')
     }).catch(err => console.error(err))
