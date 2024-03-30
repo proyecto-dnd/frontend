@@ -69,7 +69,7 @@ const TradeEvent = () => {
     if (myCharacter.length === 0) return;
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/weapon_character/character/${1}`
+      `http://localhost:8080/api/v1/weapon_character/character/${myCharacter[0].character_id}`
     );
     const data = await response.json();
 
@@ -92,7 +92,7 @@ const TradeEvent = () => {
 
     if (myCharacter.length === 0) return;
     const response = await fetch(
-      `http://localhost:8080/api/v1/armor_character/character/1`
+      `http://localhost:8080/api/v1/armor_character/character/${myCharacter[0].character_id}`
     );
     const data = await response.json();
 
