@@ -13,7 +13,7 @@ import DiceEvent from "./DiceEvent";
 import AttackEvent from "./AttackEvent";
 import TradeEvent from "./TradeEvent";
 
-const Chat = () => {
+const Chat = ({ sessionId }: any) => {
   const [active, setActive] = useState<string | false>("attack");
 
   const handleActive = (value: string) => {
@@ -54,7 +54,7 @@ const Chat = () => {
         <ActionSquare display={<DiceEvent />} icon={<D20 size={28} />} handleActive={() => handleActive("dice")} active={active === "dice"} />
         <ActionSquare display={<AttackEvent />} icon={<Stiletto size={28} />} handleActive={() => handleActive("attack")} active={active === "attack"} />
         <ActionSquare display={<DiceEvent />} icon={<SpellBook size={28} />} handleActive={() => handleActive("spell")} active={active === "spell"} />
-        <ActionSquare display={<TradeEvent />} icon={<Cash size={28} />} handleActive={() => handleActive("trade")} active={active === "trade"} />
+        <ActionSquare display={<TradeEvent sessionId={sessionId} />} icon={<Cash size={28} />} handleActive={() => handleActive("trade")} active={active === "trade"} />
       </div>
     </section>
   );

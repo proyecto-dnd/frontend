@@ -6,16 +6,16 @@ import { useState } from "react";
 import EventForm from "./EventForm";
 import styles from "./page.module.css";
 import MultiSelect from "@/components/common/inputs/MultiSelect";
-import { log } from "console";
 
-const TradeEvent = () => {
+const TradeEvent = ({ sessionId }: any) => {
   const [characters, setCharacters] = useState<Character[]>([]);
+  const [myCharacter, setMyCharacter] = useState<Character | undefined>(undefined);
   const [selectedCharacter, setSelectedCharacter] = useState<string | undefined>(undefined);
   const [selectedCharacterItemsToTrade, setSelectedCharacterItemsToTrade] = useState<Item[]>([]);
   const [myItemsToTrade, setMyItemsToTrade] = useState<Item[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [selectedCharacterItems, setSelectedCharacterItems] = useState<string[]>([]);
-
+  
   interface Item {
     value: string;
     label: string;
@@ -57,7 +57,9 @@ const TradeEvent = () => {
       (character: any) => character.user_id === user.id
     );
 
-    if (myCharacter.length === 0) return;    
+    if (myCharacter.length === 0) return;
+    
+    setMyCharacter(myCharacter[0]);
 
     return myCharacter[0].character_id;
   }
@@ -168,6 +170,118 @@ const TradeEvent = () => {
     }
   };
 
+  const createTradeEventRequest = () => {
+    let recieverRequest = {
+        session_id: sessionId,
+        sender: selectedCharacter,
+        receiver: myCharacter?.character_id,
+        description: "Trade event",
+        tradingItems: [],
+      };
+
+    const items = selectedItems.filter((item) => item.includes("item"));
+    const weapons = selectedItems.filter((item) => item.includes("weapon"));
+    const armors = selectedItems.filter((item) => item.includes("armor"));
+
+    items.forEach( async (item) => {
+      const itemsXCharacter = myItemsToTrade      
+      const itemsXCharacterId = itemsXCharacter.find((itemXCharacter) => itemXCharacter.value === item);            
+
+      recieverRequest.tradingItems.push({
+        item_x_character: itemsXCharacterId?.value?.split("-")[0],
+        item_name: itemsXCharacterId.label,
+        item_type: "item",
+        item_owner: myCharacter?.character_id,
+        item_receiver: selectedCharacter,
+        quantity: 1
+      });
+    })
+
+    weapons.forEach( async (weapon) => {
+      const weaponsXCharacter = myItemsToTrade      
+      const weaponsXCharacterId = weaponsXCharacter.find((weaponXCharacter) => weaponXCharacter.value === weapon);            
+
+      recieverRequest.tradingItems.push({
+        item_x_character: weaponsXCharacterId?.value?.split("-")[0],
+        item_name: weaponsXCharacterId.label,
+        item_type: "weapon",
+        item_owner: myCharacter?.character_id,
+        item_receiver: selectedCharacter,
+        quantity: 1
+      });
+    })
+
+    armors.forEach( async (armor) => {
+      const armorsXCharacter = myItemsToTrade      
+      const armorsXCharacterId = armorsXCharacter.find((armorXCharacter) => armorXCharacter.value === armor);            
+
+      recieverRequest.tradingItems.push({
+        item_x_character: armorsXCharacterId?.value?.split("-")[0],
+        item_name: armorsXCharacterId.label,
+        item_type: "armor",
+        item_owner: myCharacter?.character_id,
+        item_receiver: selectedCharacter,
+        quantity: 1
+      });
+    })
+
+    let ownerRequest = {
+        session_id: sessionId,
+        sender: myCharacter?.character_id,
+        receiver: selectedCharacter,
+        description: "Trade event",
+        tradingItems: [],
+      };
+
+
+    const ownerItems = selectedCharacterItems.filter((item) => item.includes("item"));
+    const ownerWeapons = selectedCharacterItems.filter((item) => item.includes("weapon"));
+    const ownerArmors = selectedCharacterItems.filter((item) => item.includes("armor"));
+
+    ownerItems.forEach( async (item) => {
+      const itemsXCharacter = selectedCharacterItemsToTrade      
+      const itemsXCharacterId = itemsXCharacter.find((itemXCharacter) => itemXCharacter.value === item);            
+
+      ownerRequest.tradingItems.push({
+        item_x_character: itemsXCharacterId?.value?.split("-")[0],
+        item_name: itemsXCharacterId.label,
+        item_type: "item",
+        item_owner: selectedCharacter,
+        item_receiver: myCharacter?.character_id,
+        quantity: 1
+      });
+    })
+
+    ownerWeapons.forEach( async (weapon) => {
+      const weaponsXCharacter = selectedCharacterItemsToTrade      
+      const weaponsXCharacterId = weaponsXCharacter.find((weaponXCharacter) => weaponXCharacter.value === weapon);            
+
+      ownerRequest.tradingItems.push({
+        item_x_character: weaponsXCharacterId?.value?.split("-")[0],
+        item_name: weaponsXCharacterId.label,
+        item_type: "weapon",
+        item_owner: selectedCharacter,
+        item_receiver: myCharacter?.character_id,
+        quantity: 1
+      });
+    })
+
+    ownerArmors.forEach( async (armor) => {
+      const armorsXCharacter = selectedCharacterItemsToTrade      
+      const armorsXCharacterId = armorsXCharacter.find((armorXCharacter) => armorXCharacter.value === armor);            
+
+      ownerRequest.tradingItems.push({
+        item_x_character: armorsXCharacterId?.value?.split("-")[0],
+        item_name: armorsXCharacterId.label,
+        item_type: "armor",
+        item_owner: selectedCharacter,
+        item_receiver: myCharacter?.character_id,
+        quantity: 1
+      });
+    })
+
+    return [recieverRequest, ownerRequest];
+  }
   useEffect(() => {
     getCharacters();
   }, []);
